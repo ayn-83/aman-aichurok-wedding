@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f7efe8">
+<title>Аман & Айчүрөк — Үйлөнүү тою</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+:root{
+  --cream:#f8f1eb;
+  --paper:#fffaf6;
+  --gold:#b58a58;
+  --gold2:#d6b27d;
+  --ink:#55443d;
+  --rose:#d98b9d;
+  --rose2:#f2c2cc;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;line-height:1.45;
+}
+button,input{font:inherit}
+.section{
+  min-height:100svh;display:flex;align-items:center;justify-content:center;
+  padding:72px 18px;position:relative;overflow:hidden;
+}
+.section:before,.section:after{
+  content:"";position:absolute;width:180px;height:180px;pointer-events:none;
+  background:radial-gradient(circle at center, rgba(214,178,125,.18), transparent 65%);
+  border-radius:50%;
+}
+.section:before{top:-70px;left:-70px}.section:after{bottom:-80px;right:-70px}
+.inner{width:min(720px,100%);text-align:center;position:relative;z-index:2}
+.kicker{letter-spacing:.18em;text-transform:uppercase;font-size:14px;color:var(--gold)}
+.script{font-family:"Great Vibes",cursive;font-weight:400}
+h1,h2,h3{font-weight:500;margin:.2em 0}
+h2{font-size:clamp(40px,11vw,72px)}
+.divider{width:100px;height:1px;background:var(--gold2);margin:20px auto 28px}
+.small{font-size:18px}
+
+#opening{
+  min-height:100svh;background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,.9), transparent 42%),
+    linear-gradient(135deg,#f5ebe2,#fffaf6 50%,#f1e2d9);
+}
+.opening-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
+.envelope{
+  width:min(340px,82vw);aspect-ratio:1.45;position:relative;cursor:pointer;
+  filter:drop-shadow(0 18px 22px rgba(100,70,50,.18));
+  perspective:900px;
+}
+.env-body{
+  position:absolute;inset:15% 0 0;background:linear-gradient(145deg,#fffdfb,#eadfd6);
+  border:1px solid rgba(181,138,88,.55);border-radius:5px;overflow:hidden;
+}
+.env-body:before,.env-body:after{
+  content:"";position:absolute;bottom:0;width:72%;height:2px;background:rgba(181,138,88,.5);
+}
+.env-body:before{left:-20%;transform:rotate(28deg)}.env-body:after{right:-20%;transform:rotate(-28deg)}
+.flap{
+  position:absolute;left:0;right:0;top:15%;height:52%;
+  background:linear-gradient(155deg,#fffdfb,#e8d9cf);clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:50% 0;transition:transform 1.05s cubic-bezier(.2,.8,.2,1);z-index:4;
+  border-top:1px solid rgba(181,138,88,.55);
+}
+.seal{
+  position:absolute;z-index:5;left:50%;top:43%;transform:translate(-50%,-50%);
+  width:55px;height:55px;border-radius:50%;background:#b78b59;color:white;
+  display:grid;place-items:center;font-family:"Great Vibes";font-size:28px;
+  box-shadow:0 5px 12px rgba(80,50,30,.2);transition:opacity .35s;
+}
+.card{
+  position:absolute;left:12%;right:12%;bottom:3%;height:70%;background:#fffaf4;
+  border:1px solid rgba(181,138,88,.35);z-index:2;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;transform:translateY(8%);transition:transform 1s ease;
+}
+.card .script{font-size:42px;color:#a6754f}.card .date{font-size:16px;letter-spacing:.12em}
+.envelope.open .flap{transform:rotateX(180deg)}
+.envelope.open .seal{opacity:0}
+.envelope.open .card{transform:translateY(-32%)}
+.open-btn{
+  border:1px solid var(--gold);background:rgba(255,250,246,.7);color:#7f5c3f;
+  padding:12px 32px;border-radius:999px;letter-spacing:.16em;font-size:14px;
+  text-transform:uppercase;cursor:pointer;transition:.25s;
+}
+.open-btn:hover{background:#fff}
+
+#main{display:none}
+#main.visible{display:block}
+.hero{min-height:92svh;background:linear-gradient(#fbf5ef,#f6eae2)}
+.hero-photo{
+  width:min(430px,88vw);aspect-ratio:4/5;object-fit:cover;border-radius:180px 180px 16px 16px;
+  border:8px solid rgba(255,255,255,.7);box-shadow:0 18px 45px rgba(80,50,35,.16);
+  margin:24px auto;
+}
+.names{font-size:clamp(58px,15vw,110px);color:#a6754f;line-height:.9}
+.invite{font-size:22px;max-width:570px;margin:22px auto}
+
+.date-box{
+  border:1px solid rgba(181,138,88,.45);padding:28px 20px;background:rgba(255,250,246,.65);
+  box-shadow:0 15px 40px rgba(80,50,35,.08)
+}
+.date-big{font-size:clamp(34px,9vw,60px);color:#a6754f;letter-spacing:.05em}
+.time{font-size:28px;margin-top:8px}
+
+.love img,.gallery img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.love-frame{
+  max-width:520px;margin:25px auto;background:#fffaf6;padding:10px;border:1px solid rgba(181,138,88,.35);
+  box-shadow:0 18px 45px rgba(80,50,35,.13)
+}
+.love-frame img{aspect-ratio:4/5}
+.caption{padding:16px 10px 10px}.caption strong{display:block;color:#a6754f;font-size:22px}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:25px}
+.gallery-grid figure{margin:0;aspect-ratio:3/4;overflow:hidden;border-radius:8px;background:#eee}
+.gallery-grid figure:nth-child(3n){aspect-ratio:4/3;grid-column:span 2}
+
+.location-card{
+  padding:34px 20px;background:#fffaf6;border:1px solid rgba(181,138,88,.35);
+  box-shadow:0 18px 40px rgba(80,50,35,.09)
+}
+.map-btn,.submit-btn{
+  display:inline-block;margin-top:18px;padding:12px 25px;border:1px solid var(--gold);
+  color:#79583d;text-decoration:none;border-radius:999px;background:transparent;cursor:pointer;
+}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:25px}
+.count{background:rgba(255,250,246,.75);padding:15px 5px;border:1px solid rgba(181,138,88,.25)}
+.count b{display:block;font-size:34px;color:#a6754f}
+.count span{font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+
+.rsvp-box{
+  background:#fffaf6;padding:30px 20px;border:1px solid rgba(181,138,88,.35);
+  box-shadow:0 18px 40px rgba(80,50,35,.08)
+}
+.choice{display:flex;flex-direction:column;gap:10px;text-align:left;max-width:420px;margin:20px auto}
+.choice label{
+  padding:12px 14px;border:1px solid rgba(181,138,88,.3);border-radius:10px;cursor:pointer;background:#fff;
+}
+.choice input{accent-color:#b58a58;margin-right:8px}
+.name-input{
+  width:100%;max-width:420px;padding:13px 14px;border:1px solid rgba(181,138,88,.4);
+  background:white;border-radius:10px;outline:none;color:var(--ink)
+}
+.status{min-height:28px;margin-top:12px;font-size:17px}
+
+.music-toggle{
+  position:fixed;right:15px;bottom:15px;z-index:50;width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--gold);background:rgba(255,250,246,.92);color:#8a684b;cursor:pointer;
+  box-shadow:0 6px 20px rgba(70,45,30,.15);display:none
+}
+.petals{position:fixed;inset:0;pointer-events:none;z-index:40;overflow:hidden}
+.petal{
+  position:absolute;top:-30px;width:13px;height:20px;background:linear-gradient(135deg,#f3c1cc,#d98b9d);
+  border-radius:100% 0 100% 0;opacity:.9;animation:fall linear forwards;
+}
+@keyframes fall{to{transform:translate3d(var(--x),110vh,0) rotate(620deg);opacity:.15}}
+.fade{opacity:0;transform:translateY(25px);transition:opacity 1s ease,transform 1s ease}
+.fade.show{opacity:1;transform:none}
+
+.footer{min-height:75svh;background:linear-gradient(#f6e9e0,#f3e0d6)}
+.footer .script{font-size:64px;color:#a6754f}
+
+@media(max-width:420px){
+  body{font-size:18px}.section{padding:60px 14px}.count b{font-size:27px}
+  .names{font-size:62px}.invite{font-size:20px}.footer .script{font-size:54px}
+}
+</style>
+</head>
+<body>
+
+<section id="opening" class="section">
+  <div class="inner opening-inner">
+    <div class="kicker">Биздин үйлөнүү тоюбуз</div>
+    <div class="envelope" id="envelope" aria-label="Чакыруу конверти">
+      <div class="env-body"></div>
+      <div class="card">
+        <div class="kicker">Wedding Invitation</div>
+        <div class="script">Аман & Айчүрөк</div>
+        <div class="date">19 • 09 • 2026</div>
+      </div>
+      <div class="flap"></div>
+      <div class="seal">A</div>
+    </div>
+    <button class="open-btn" id="openBtn">АЧУУ</button>
+    <div class="small">Чакыруу катын ачуу үчүн басыңыз</div>
+  </div>
+</section>
+
+<div id="main">
+  <button class="music-toggle" id="musicToggle" aria-label="Музыка">♫</button>
+  <audio id="music" src="music.mp3" loop preload="auto"></audio>
+  <div class="petals" id="petals"></div>
+
+  <section class="section hero">
+    <div class="inner fade">
+      <div class="kicker">Wedding Invitation</div>
+      <h1 class="names script">Аман & Айчүрөк</h1>
+      <div class="divider"></div>
+      <p class="invite">Урматтуу туугандар, достор жана жакындар!<br>
+      Биздин кубанычтуу күнүбүзгө сиздерди чакырабыз.</p>
+      <img class="hero-photo" src="images/wedding-02.jpg" alt="Аман жана Айчүрөк">
+    </div>
+  </section>
+
+  <section class="section love">
+    <div class="inner fade">
+      <div class="kicker">Love Story</div>
+      <h2 class="script">Биздин сүйүү баяныбыз</h2>
+      <div class="divider"></div>
+      <div class="love-frame">
+        <img src="images/love-story.jpg" alt="Love Story">
+        <div class="caption">
+          <strong>💍 Колумду сураган күн</strong>
+          14-март, 2026-жыл
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="inner fade">
+      <div class="kicker">Save the Date</div>
+      <h2 class="script">Той күнү</h2>
+      <div class="date-box">
+        <div class="date-big">19 СЕНТЯБРЬ 2026</div>
+        <div class="time">19:00</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="inner fade">
+      <div class="kicker">Location</div>
+      <h2 class="script">Той өтүүчү жер</h2>
+      <div class="location-card">
+        <h3>Жазгүл кафеси</h3>
+        <p>Көк-Жар айылы</p>
+        <a class="map-btn" target="_blank" rel="noopener"
+           href="https://www.google.com/maps/search/?api=1&query=Жазгүл+кафеси,+Көк-Жар+айылы">
+          📍 КАРТАДАН КӨРҮҮ
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="inner fade">
+      <div class="kicker">Countdown</div>
+      <h2 class="script">Тойго чейин</h2>
+      <div class="countdown">
+        <div class="count"><b id="days">0</b><span>күн</span></div>
+        <div class="count"><b id="hours">0</b><span>саат</span></div>
+        <div class="count"><b id="mins">0</b><span>мүнөт</span></div>
+        <div class="count"><b id="secs">0</b><span>секунд</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="inner fade">
+      <div class="kicker">With Love</div>
+      <h2 class="script">Той ээлери</h2>
+      <div class="divider"></div>
+      <div class="date-big">Султан & Гүлайым</div>
+    </div>
+  </section>
+
+  <section class="section gallery">
+    <div class="inner fade">
+      <div class="kicker">Our Memories</div>
+      <h2 class="script">Сүрөттөр</h2>
+      <div class="gallery-grid">
+        <figure><img src="images/wedding-01.jpg" alt=""></figure>
+        <figure><img src="images/wedding-03.jpg" alt=""></figure>
+        <figure><img src="images/wedding-04.jpg" alt=""></figure>
+        <figure><img src="images/wedding-05.jpg" alt=""></figure>
+        <figure><img src="images/wedding-06.jpg" alt=""></figure>
+        <figure><img src="images/wedding-07.jpg" alt=""></figure>
+        <figure><img src="images/wedding-08.jpg" alt=""></figure>
+        <figure><img src="images/wedding-09.jpg" alt=""></figure>
+        <figure><img src="images/wedding-10.jpg" alt=""></figure>
+        <figure><img src="images/wedding-11.jpg" alt=""></figure>
+        <figure><img src="images/wedding-12.jpg" alt=""></figure>
+        <figure><img src="images/wedding-13.jpg" alt=""></figure>
+        <figure><img src="images/wedding-14.jpg" alt=""></figure>
+        <figure><img src="images/wedding-15.jpg" alt=""></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="inner fade">
+      <div class="kicker">RSVP</div>
+      <h2 class="script">Тойго келесизби?</h2>
+      <div class="rsvp-box">
+        <div class="choice">
+          <label><input type="radio" name="attendance" value="Ооба, сөзсүз келем"> Ооба, сөзсүз келем</label>
+          <label><input type="radio" name="attendance" value="Тилекке каршы, келе албайм"> Тилекке каршы, келе албайм</label>
+        </div>
+        <input id="guestName" class="name-input" type="text" maxlength="80" placeholder="Атыңыз" autocomplete="name">
+        <br>
+        <button class="submit-btn" id="rsvpBtn">ЖООП ЖӨНӨТҮҮ</button>
+        <div class="status" id="status"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section footer">
+    <div class="inner fade">
+      <div class="kicker">With Love</div>
+      <div class="script">Аман & Айчүрөк</div>
+      <div class="divider"></div>
+      <p>Сиздерди чыдамсыздык менен күтөбүз!<br>Биздин кубанычыбызды бөлүшкөнүңүздөр үчүн рахмат.</p>
+      <div class="small">19.09.2026 • 19:00</div>
+    </div>
+  </section>
+</div>
+
+<script>
+const envelope = document.getElementById('envelope');
+const openBtn = document.getElementById('openBtn');
+const main = document.getElementById('main');
+const music = document.getElementById('music');
+const musicToggle = document.getElementById('musicToggle');
+const petals = document.getElementById('petals');
+
+function createPetals(n=34){
+  for(let i=0;i<n;i++){
+    const p=document.createElement('i');
+    p.className='petal';
+    p.style.left=(Math.random()*100)+'%';
+    p.style.setProperty('--x',(Math.random()*180-90)+'px');
+    p.style.animationDuration=(4+Math.random()*5)+'s';
+    p.style.animationDelay=(Math.random()*1.8)+'s';
+    p.style.transform=`rotate(${Math.random()*360}deg)`;
+    petals.appendChild(p);
+    setTimeout(()=>p.remove(),10000);
+  }
+}
+openBtn.addEventListener('click',()=>{
+  envelope.classList.add('open');
+  openBtn.disabled=true;
+  createPetals(42);
+  setTimeout(()=>{
+    document.getElementById('opening').style.display='none';
+    main.classList.add('visible');
+    musicToggle.style.display='grid';
+    music.play().catch(()=>{});
+    document.querySelectorAll('.fade').forEach((el,i)=>setTimeout(()=>el.classList.add('show'),120+i*80));
+    window.scrollTo({top:0,behavior:'instant'});
+  },1200);
+});
+musicToggle.addEventListener('click',()=>{
+  if(music.paused){music.play();musicToggle.textContent='♫'}
+  else{music.pause();musicToggle.textContent='×'}
+});
+
+const target = new Date('2026-09-19T19:00:00+06:00').getTime();
+function tick(){
+  let diff=Math.max(0,target-Date.now());
+  const d=Math.floor(diff/86400000); diff%=86400000;
+  const h=Math.floor(diff/3600000); diff%=3600000;
+  const m=Math.floor(diff/60000); const s=Math.floor((diff%60000)/1000);
+  document.getElementById('days').textContent=d;
+  document.getElementById('hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('secs').textContent=String(s).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+const phone='996557166799';
+document.getElementById('rsvpBtn').addEventListener('click',()=>{
+  const choice=document.querySelector('input[name="attendance"]:checked');
+  const name=document.getElementById('guestName').value.trim();
+  const status=document.getElementById('status');
+  if(!choice){status.textContent='Жооптун бир вариантын тандаңыз.';return}
+  if(!name){status.textContent='Атыңызды жазыңыз.';return}
+  const text=`Саламатсызбы!%0AАман & Айчүрөктүн тоюна катышуум: ${encodeURIComponent(choice.value)}%0AАтым: ${encodeURIComponent(name)}`;
+  window.open(`https://wa.me/${phone}?text=${text}`,'_blank');
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
+},{threshold:.12});
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
